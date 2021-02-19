@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "app-main": {},
+    "style": {},
+    "app-header": {}
+  },
+  "attributes": {
+    "v-bind:class": {},
+    "v-on:click": {},
+    "src": {},
+    "v-for": {},
+    "lang": {},
+    "v-model": {}
+  }
+}

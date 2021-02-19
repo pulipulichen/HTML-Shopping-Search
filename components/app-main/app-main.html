@@ -1,0 +1,68 @@
+<form class="ui form segment">
+
+  
+  <div class="field">
+    <label>
+      Search Keyword
+    </label>
+    <input type="text" v-model="keyword" />
+  </div>
+  
+  <div class="field">
+    <label>
+      Websites
+    </label>
+    
+    <div class="inline fields">
+      <div class="field" v-for="website in websitesList">
+        <div class="ui checkbox">
+          <input type="checkbox"
+                 v-bind:id="website"
+                 v-bind:value="website"
+                 v-model="websites">
+          <label v-bind:for="website">{{ website }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="field">
+    <button type="button"
+            class="ui fluid button"
+            v-on:click="searchShoppingWebsite">
+      SEARCH
+    </button>
+  </div>
+  
+  <div class="field">
+    <div class="ui action input">
+      <input type="text" v-bind:value="computedFilename"
+             onfocus="this.select()" />
+      <button type="button"
+        class="ui icon button"
+        v-on:click="copyFilename">
+        <i class="copy icon"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="ui action input">
+      <input type="text" v-bind:value="tableContent"
+             onfocus="this.select()" />
+      <button type="button"
+        class="ui icon button"
+        v-on:click="copyTable">
+        <i class="copy icon"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div class="field">
+    <a class="ui fluid button"
+       href="https://drive.google.com/drive/u/0/">
+      Open Google Drive
+    </a>
+  </div>
+  
+</form>
