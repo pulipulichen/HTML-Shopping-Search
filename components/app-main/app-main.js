@@ -13,16 +13,24 @@ let appMain = {
       'PChome Shopping'
     ]
     
+    let bidWebsitesList = [
+      'Shopee',
+      'Ruten',
+      'Yahoo Bid',
+    ]
+    
     return {
       cacheKey: 'HTML-Shopping-Search',
-      cacheAttrs: ['keyword', 'websites'],
+      cacheAttrs: ['keyword', 'websites', 'priceMin'],
       init: false,
       
       websitesList,
+      bidWebsitesList,
       tableContent: `網址	品項	價位(含運費)	備註`,
       
       keyword: 'Android 電子紙',
       websites: websitesList,
+      priceMin: 50
     }
   },
   mounted () {
@@ -46,28 +54,28 @@ let appMain = {
       return encodeURIComponent(this.keyword)
     },
     computedShopeeURL () {
-      return `https://shopee.tw/search/?keyword=${this.encodeKeyword}&order=asc&page=0&sortBy=price`
+      return `https://shopee.tw/search/?keyword=${this.encodeKeyword}&order=asc&page=0&minPrice=${this.priceMin}&sortBy=price`
     },
     computedRutenURL () {
-      return `https://find.ruten.com.tw/s/?q=${this.encodeKeyword}&sort=prc%2Fac`
+      return `https://find.ruten.com.tw/s/?area=0&prc.range=${this.priceMin}-&q=${this.encodeKeyword}&sort=prc%2Fac`
     },
     computedYahooBidURL () {
-      return `https://tw.bid.yahoo.com/search/auction/product?p=${this.encodeKeyword}&sort=curp`
+      return `https://tw.bid.yahoo.com/search/auction/product?minp=${this.priceMin}&p=${this.encodeKeyword}&sort=curp`
     },
     computedYahooBuyURL () {
-      return `https://tw.buy.yahoo.com/search/product?p=${this.encodeKeyword}&sort=price`
+      return `https://tw.buy.yahoo.com/search/product?minp=${this.priceMin}&p=${this.encodeKeyword}&sort=price`
     },
     computedYahooMallURL () {
-      return `https://tw.mall.yahoo.com/search/product?p=${this.encodeKeyword}&sort=p`
+      return `https://tw.mall.yahoo.com/search/product?minp=${this.priceMin}&p=${this.encodeKeyword}&sort=p`
     },
     computedMomoURL () {
-      return `https://www.momoshop.com.tw/search/searchShop.jsp?keyword=${this.encodeKeyword}&searchType=2&curPage=1&_isFuzzy=0&showType=chessboardType`
+      return `https://www.momoshop.com.tw/search/searchShop.jsp?keyword=${this.encodeKeyword}&searchType=2&curPage=1&_advPriceS=${this.priceMin}&_isFuzzy=0&showType=chessboardType`
     },
     computedMomMalloURL () {
       return `https://www.momomall.com.tw/mmlsearch/${this.encodeKeyword}.html`
     },
     computedPChomeShoppingURL () {
-      return `https://ecshweb.pchome.com.tw/search/v3.3/?q=${this.encodeKeyword}&scope=all&sortParm=prc&sortOrder=ac`
+      return `https://ecshweb.pchome.com.tw/search/v3.3/?q=${this.encodeKeyword}&scope=all&sortParm=prc&sortOrder=ac&min=${this.priceMin}`
     },
     websiteURLMapping () {
       return {
@@ -95,6 +103,12 @@ let appMain = {
     },
     disabelDeselectAllWebsites () {
       return (this.websites.length === 0)
+    },
+    disabelSelectBidWebsites () {
+      return (JSON.stringify(this.websites) === JSON.stringify(this.bidWebsitesList))
+    },
+    disableSearch () {
+      return (this.keyword.trim() === '')
     }
   },
   methods: {
@@ -126,6 +140,10 @@ let appMain = {
     },
     searchShoppingWebsite () {
       
+      if (this.disableSearch) {
+        return false
+      }
+      
       this.urlList.forEach(url => {
         window.open(url, (new URL(url)).host)
       })
@@ -135,6 +153,9 @@ let appMain = {
     },
     copyTable () {
       ClipboardUtils.copyPlainString(this.tableContent)
+    },
+    selectBidWebsites () {
+      this.websites = this.bidWebsitesList
     },
     selectAllWebsites () {
       this.websites = this.websitesList

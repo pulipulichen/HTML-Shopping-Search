@@ -1,11 +1,28 @@
 <form class="ui form segment">
 
-  
-  <div class="field">
-    <label>
-      Search Keyword
-    </label>
-    <input type="text" v-model="keyword" />
+  <div class="two fields">
+    <div class="field">
+      <label>
+        Search Keyword
+      </label>
+      <input type="text" v-model="keyword"
+             v-on:keyup.enter="searchShoppingWebsite" />
+    </div>
+    <div class="field">
+      <label>
+        Price Range
+      </label>
+      <div class="inline fields">
+        <div class="field">
+          <input type="number" v-model="priceMin"
+               step="10"
+               v-on:keyup.enter="searchShoppingWebsite" />
+        </div>
+        <div class="field">
+          -
+        </div>
+      </div>
+    </div>
   </div>
   
   <div class="field">
@@ -23,6 +40,13 @@
                 class="ui button"
                 v-bind:class="{disabled: disabelSelectAllWebsites}">
           Select All
+        </button>
+      </div>
+      <div class="field" v-on:click="selectBidWebsites">
+        <button type="button"
+                class="ui button"
+                v-bind:class="{disabled: disabelSelectBidWebsites}">
+          Select Bid
         </button>
       </div>
       <div class="field" v-on:click="deselectAllWebsites">
