@@ -30,7 +30,8 @@ let appMain = {
       
       keyword: 'Android 電子紙',
       websites: websitesList,
-      priceMin: 50
+      priceMin: 50,
+      opened: []
     }
   },
   mounted () {
@@ -44,6 +45,11 @@ let appMain = {
     },
     websites () {
       this.dataSave()
+      this.opened = []
+    },
+    priceMin () {
+      this.dataSave()
+      this.opened = []
     },
   },
   computed: {
@@ -162,6 +168,34 @@ let appMain = {
     },
     deselectAllWebsites () {
       this.websites = []
+    },
+    setOpened (website) {
+      
+      if (this.isOpened(website)) {
+        return false
+      }
+      
+      let isback = false
+      
+      let setOpened = () => {
+        //console.log('setOpened')
+        if (isback === false) {
+          this.opened.push(website)
+        }
+        window.removeEventListener('focus', setOpened)
+      }
+      
+      let setBack = () => {
+        //console.log('setBack')
+        isback = true
+      }
+      
+      setTimeout(setOpened, 5 * 1000)
+      
+      window.addEventListener('focus', setBack)
+    },
+    isOpened (website) {
+      return (this.opened.indexOf(website) > -1)
     }
   }
 }
