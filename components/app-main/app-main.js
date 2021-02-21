@@ -9,6 +9,7 @@ let appMain = {
       'Yahoo Buy',
       'Yahoo Mall',
       'Momo',
+      'Momo Mall',
       'PChome Shopping'
     ]
     
@@ -21,7 +22,7 @@ let appMain = {
       tableContent: `網址	品項	價位(含運費)	備註`,
       
       keyword: 'Android 電子紙',
-      websites: websitesList
+      websites: websitesList,
     }
   },
   mounted () {
@@ -62,6 +63,9 @@ let appMain = {
     computedMomoURL () {
       return `https://www.momoshop.com.tw/search/searchShop.jsp?keyword=${this.encodeKeyword}&searchType=2&curPage=1&_isFuzzy=0&showType=chessboardType`
     },
+    computedMomMalloURL () {
+      return `https://www.momomall.com.tw/mmlsearch/${this.encodeKeyword}.html`
+    },
     computedPChomeShoppingURL () {
       return `https://ecshweb.pchome.com.tw/search/v3.3/?q=${this.encodeKeyword}&scope=all&sortParm=prc&sortOrder=ac`
     },
@@ -73,6 +77,7 @@ let appMain = {
         'Yahoo Buy': this.computedYahooBuyURL,
         'Yahoo Mall': this.computedYahooMallURL,
         'Momo': this.computedMomoURL,
+        'Momo Mall': this.computedMomMalloURL,
         'PChome Shopping': this.computedPChomeShoppingURL
       }
     },
@@ -84,6 +89,12 @@ let appMain = {
       })
       
       return list
+    },
+    disabelSelectAllWebsites () {
+      return (this.websites.length === this.websitesList.length)
+    },
+    disabelDeselectAllWebsites () {
+      return (this.websites.length === 0)
     }
   },
   methods: {
@@ -124,6 +135,12 @@ let appMain = {
     },
     copyTable () {
       ClipboardUtils.copyPlainString(this.tableContent)
+    },
+    selectAllWebsites () {
+      this.websites = this.websitesList
+    },
+    deselectAllWebsites () {
+      this.websites = []
     }
   }
 }

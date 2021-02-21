@@ -11,9 +11,28 @@
   <div class="field">
     <label>
       Websites
+      <a href="https://docs.google.com/document/d/1SjXOkvfveMMkp_ILwLUFdLTnbQiGRcMV4HkBjB3Qlj4/edit"
+         target="memo">
+        (shopping memo)
+      </a>
     </label>
     
     <div class="inline fields">
+      <div class="field" v-on:click="selectAllWebsites">
+        <button type="button"
+                class="ui button"
+                v-bind:class="{disabled: disabelSelectAllWebsites}">
+          Select All
+        </button>
+      </div>
+      <div class="field" v-on:click="deselectAllWebsites">
+        <button type="button"
+                class="ui button"
+                v-bind:class="{disabled: disabelDeselectAllWebsites}">
+          Deselect All
+        </button>
+      </div>
+      
       <div class="field" v-for="website in websitesList">
         <div class="ui checkbox">
           <input type="checkbox"
@@ -60,7 +79,8 @@
   
   <div class="field">
     <a class="ui fluid button"
-       href="https://drive.google.com/drive/u/0/">
+       href="https://drive.google.com/drive/u/0/"
+       target="_blank">
       Open Google Drive
     </a>
   </div>

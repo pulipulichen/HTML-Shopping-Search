@@ -6,9 +6,11 @@
   },
   "attributes": {
     "v-bind:class": {},
+    "v-bind:value": {},
     "v-on:click": {},
     "src": {},
     "v-for": {},
+    "v-bind:for": {},
     "lang": {},
     "v-model": {}
   }
