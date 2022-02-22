@@ -81,7 +81,7 @@ let appMain = {
       return `https://www.momomall.com.tw/mmlsearch/${this.encodeKeyword}.html`
     },
     computedPChomeShoppingURL () {
-      return `https://ecshweb.pchome.com.tw/search/v3.3/?q=${this.encodeKeyword}&scope=all&sortParm=prc&sortOrder=ac&min=${this.priceMin}`
+      return `https://ecshweb.pchome.com.tw/search/v3.3/?q=${this.encodeKeyword}&scope=all&sortParm=prc&sortOrder=ac&min=${this.priceMin}&max=${this.priceMin * 100000}`
     },
     websiteURLMapping () {
       return {
