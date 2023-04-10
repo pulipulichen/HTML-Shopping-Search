@@ -1,5 +1,5 @@
 {
-  "name": "HTML-Shopping-Search",
+  "name": "Shopping-Search",
   "short_name": "ShoppingSearch",
   "start_url": "./index.html",
   "display": "standalone",
